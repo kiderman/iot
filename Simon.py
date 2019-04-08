@@ -50,7 +50,7 @@ def button_light_led(led):
 
 #adds new color to the pattern for the next turn of the player
 def add_color(leds, listOfcolors):
-    numOfled = random.randint(1,5)
+    numOfled = random.randint(0,4)
     listOfcolors.append(leds[numOfled])
 
 #play pattern for the player to repeat - the list of colors is a list of the numbers of the pins of the leds
@@ -93,7 +93,7 @@ def game_over(leds, listOfcolors):
 def play():
 
     while True:
-        add_color(leds,listOfcolors)             #level number 1 - only 1 led is on
+        add_color(leds, listOfcolors)             #level number 1 - only 1 led is on
         play_pattern(listOfcolors)
         vaildate_player_moves(listOfcolors)
 
