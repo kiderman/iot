@@ -52,6 +52,7 @@ def button_light_led(led):
 def add_color(leds, listOfcolors):
     numOfled = random.randint(0,3)
     listOfcolors.append(leds[numOfled])
+    print(listOfcolors)
 
 #play pattern for the player to repeat - the list of colors is a list of the numbers of the pins of the leds
 def play_pattern(listOfcolors):
@@ -68,6 +69,7 @@ def vaildate_player_moves(listOfcolors):
             return False
 
         else:
+            print("the user pressed on:", color)
             button_light_led(color)
     #if he followed all the colors return true to continue the game
     return True
@@ -92,7 +94,7 @@ def game_over(leds, listOfcolors):
 
 def play():
 
-    while True:
+   while True:
         add_color(leds, listOfcolors)             #level number 1 - only 1 led is on
         play_pattern(listOfcolors)
         vaildate_player_moves(listOfcolors)
@@ -100,3 +102,4 @@ def play():
 
 #start game
 play()
+
