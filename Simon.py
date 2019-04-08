@@ -29,9 +29,7 @@ dButtons = dict(zip(leds, buttons))
 listOfcolors = []
 
 
-for button in buttons:
-    #set the button pins to input with a pull up resistor
-    GPIO.setup(button,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+
 for led in leds:
     #set the led pins to output
     GPIO.setup(led, GPIO.OUT)
@@ -70,6 +68,9 @@ def vaildate_player_moves(leds, listOfcolors):
     i = 0
     #check if some button was pushed
     while (i < len(listOfcolors)):
+        for button in buttons:
+             #set the button pins to input with a pull up resistor
+            GPIO.setup(button,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
         for led in leds:
             current = (GPIO.input(dButtons[led]) == GPIO.HIGH)
             if current:
