@@ -72,12 +72,14 @@ def vaildate_player_moves(leds, listOfcolors):
             GPIO.setup(led, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
             current = (GPIO.input(led) == GPIO.HIGH)
         if current:
+            print("True")
             #if the user clicked the wrong button
             if (not listOfcolors[i] == current):
                 game_over(leds, listOfcolors)
                 return False
             else:
                 i += 1
+                print(i)
                 sleep(1)
 
                 #if he followed all the colors return true to continue the game
@@ -110,6 +112,7 @@ def play():
         add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
         t = vaildate_player_moves(leds, listOfcolors)
+        print("t is", t)
 
 
 #start game
