@@ -8,6 +8,7 @@ import random
 import wiringpi
 from time import sleep
 
+
 #Set up the script to use the BCM pin configuration
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -63,27 +64,24 @@ def play_pattern(listOfcolors):
 #wait for the player to repeat the notes and check if he did it correct
 def vaildate_player_moves(leds, listOfcolors):
     print("validate", listOfcolors)
-    noButtonPushed = True
     i = 0
     pin = None
     #check if some button was pushed
-    while(noButtonPushed and i < len(listOfcolors)):
+    while (i < len(listOfcolors)):
         for led in leds:
             GPIO.setup(led, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
             current = (GPIO.input(led) == GPIO.HIGH)
-            if current:
-                noButtonPushed = False
-                #if the user clicked the wrong button
-                if (not listOfcolors[i] == current):
-                    game_over(leds, listOfcolors)
-                    return False
-                else:
-                    i += 1
-                    noButtonPushed = True
-                    sleep(1)
+        if current:
+            #if the user clicked the wrong button
+            if (not listOfcolors[i] == current):
+                game_over(leds, listOfcolors)
+                return False
+            else:
+                i += 1
+                sleep(1)
 
                 #if he followed all the colors return true to continue the game
-            return True
+    return True
 
 
 
@@ -104,12 +102,12 @@ def game_over(leds, listOfcolors):
         GPIO.output(leds[2], GPIO.LOW)
         GPIO.output(leds[3], GPIO.LOW)
 
-    print("Game Over! Your is:", len(listOfcolors))
+    print("Game Over! Your score is:", len(listOfcolors))
 
 def play():
    t = True
    while t:
-        add_color(leds, listOfcolors)             
+        add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
         t = vaildate_player_moves(leds, listOfcolors)
 
