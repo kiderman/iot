@@ -28,9 +28,9 @@ listOfcolors = []
 
 for led in leds:
     #set the button pins to input with a pull up resistor
-    GPIO.setup(leds[led],GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+    GPIO.setup(led,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
     #set the led pins to output
-    GPIO.setup(leds[led], GPIO.OUT)
+    GPIO.setup(led, GPIO.OUT)
 
 
 
