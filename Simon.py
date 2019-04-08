@@ -70,7 +70,7 @@ def vaildate_player_moves(leds, listOfcolors):
     while (i < len(listOfcolors)):
         for led in leds:
             print(led)
-            GPIO.setup(led, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+            
             current = (GPIO.input(led) == GPIO.HIGH)
             if current:
                 print("True")
