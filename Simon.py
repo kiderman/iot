@@ -111,7 +111,7 @@ def play():
    while t:
         add_color(leds, listOfcolors)             
         play_pattern(listOfcolors)
-        t = vaildate_player_moves(listOfcolors)
+        t = vaildate_player_moves(leds, listOfcolors)
 
 
 #start game
