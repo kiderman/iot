@@ -61,18 +61,32 @@ def play_pattern(listOfcolors):
         button_light_led(color)
 
 #wait for the player to repeat the notes and check if he did it correct
-def vaildate_player_moves(listOfcolors):
-    for color in listOfcolors:
-        sleep(5)
-        #if the user didn't press the button on time or pressed another button
-        if(not GPIO.input(color) == GPIO.HIGH):
-            return False
+def vaildate_player_moves(leds, listOfcolors):
+    print("validate", listOfcolors)
+    noButtonPushed = True
+    i = 0
+    pin = None
+    #check if some button was pushed
+    while(noButtonPushed and i < len(listOfcolors)):
+        for led in leds:
+            GPIO.setup(led, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+            current = (GPIO.input(led) == GPIO.HIGH)
+            if current:
+                noButtonPushed = False
+                #if the user clicked the wrong button
+                if (not listOfcolors[i] == current):
+                    game_over(leds, listOfcolors)
+                    return False
+                else:
+                    i += 1
+                    noButtonPushed = True
+                    sleep(1)
 
-        else:
-            print("the user pressed on:", color)
-            button_light_led(color)
-    #if he followed all the colors return true to continue the game
-    return True
+                #if he followed all the colors return true to continue the game
+            return True
+
+
+
 
 #game over case
 def game_over(leds, listOfcolors):
@@ -93,13 +107,12 @@ def game_over(leds, listOfcolors):
     print("Game Over! Your is:", len(listOfcolors))
 
 def play():
-
-   while True:
-        add_color(leds, listOfcolors)             #level number 1 - only 1 led is on
+   t = True
+   while t:
+        add_color(leds, listOfcolors)             
         play_pattern(listOfcolors)
-        vaildate_player_moves(listOfcolors)
+        t = vaildate_player_moves(listOfcolors)
 
 
 #start game
 play()
-
