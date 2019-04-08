@@ -3,7 +3,7 @@ Einav Kiderman 205363013
 Inbal Carasso 204694111
 
 """
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 import random
 import wiringpi
 from time import sleep
