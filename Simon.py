@@ -22,14 +22,17 @@ green = 6
 yellow = 13
 red = 19
 leds = [blue, green, yellow, red]
+buttons = [25, 12, 16, 21]
 sounds = [440, 880, 20, 1760]
-dictionary = dict(zip(leds, sounds))
+dSounds = dict(zip(leds, sounds))
+dButtons = dict(zip(leds, buttons))
 listOfcolors = []
 
 
-for led in leds:
+for button in buttons:
     #set the button pins to input with a pull up resistor
-    GPIO.setup(led,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+    GPIO.setup(button,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+for led in leds:
     #set the led pins to output
     GPIO.setup(led, GPIO.OUT)
 
@@ -39,10 +42,10 @@ for led in leds:
 
 #when button pressed light the led and play the sound
 def button_light_led(led):
-        buttonState = GPIO.input(led)
+        buttonState = GPIO.input(dButtons[led])
         if(not buttonState):
             GPIO.output(led, GPIO.HIGH)
-            wiringpi.softToneWrite(speaker, dictionary[led])
+            wiringpi.softToneWrite(speaker, dSounds[led])
             sleep(1)
             wiringpi.softToneWrite(speaker, 0)
             GPIO.output(led, GPIO.LOW)
@@ -68,9 +71,7 @@ def vaildate_player_moves(leds, listOfcolors):
     #check if some button was pushed
     while (i < len(listOfcolors)):
         for led in leds:
-            print(led)
-
-            current = (GPIO.input(led) == GPIO.HIGH)
+            current = (GPIO.input(dButtons[led]) == GPIO.HIGH)
             if current:
                 print("True")
             #if the user clicked the wrong button
@@ -95,7 +96,7 @@ def game_over(leds, listOfcolors):
         GPIO.output(leds[1], GPIO.HIGH)
         GPIO.output(leds[2], GPIO.HIGH)
         GPIO.output(leds[3], GPIO.HIGH)
-        wiringpi.softToneWrite(speaker, dictionary[led])
+        wiringpi.softToneWrite(speaker, dSounds[led])
         sleep(1)
         wiringpi.softToneWrite(speaker, 0)
         GPIO.output(leds[0], GPIO.LOW)
