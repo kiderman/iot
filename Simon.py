@@ -112,6 +112,8 @@ def play():
         add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
         t = vaildate_player_moves(leds, listOfcolors)
+        
+    return
 
 
 #start game
