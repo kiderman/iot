@@ -93,7 +93,7 @@ def game_over(leds, listOfcolors):
 def play():
 
     while True:
-        add_color(leds)             #level number 1 - only 1 led is on
+        add_color(leds,listOfcolors)             #level number 1 - only 1 led is on
         play_pattern(listOfcolors)
         vaildate_player_moves(listOfcolors)
 
