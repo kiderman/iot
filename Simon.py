@@ -43,6 +43,7 @@ for led in leds:
 #when button pressed light the led and play the sound
 def button_light_led(led):
         buttonState = GPIO.input(dButtons[led])
+        print(dButtons[led])
         if(not buttonState):
             GPIO.output(led, GPIO.HIGH)
             wiringpi.softToneWrite(speaker, dSounds[led])
