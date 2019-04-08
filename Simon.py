@@ -13,10 +13,10 @@ from time import sleep
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 wiringpi.wiringPiSetupGpio()
-wiringpi.softToneCreate(26)
+wiringpi.softToneCreate(24)
 
 #number of pin for each part
-speaker = 26
+speaker = 24
 blue = 5
 green = 6
 yellow = 13
@@ -65,12 +65,11 @@ def play_pattern(listOfcolors):
 def vaildate_player_moves(leds, listOfcolors):
     print("validate", listOfcolors)
     i = 0
-    pin = None
     #check if some button was pushed
     while (i < len(listOfcolors)):
         for led in leds:
             print(led)
-            
+
             current = (GPIO.input(led) == GPIO.HIGH)
             if current:
                 print("True")
@@ -79,8 +78,8 @@ def vaildate_player_moves(leds, listOfcolors):
                     game_over(leds, listOfcolors)
                     return False
                 else:
-                    i += 1
-                    sleep(1)
+                        i += 1
+                        sleep(1)
 
                 #if he followed all the colors return true to continue the game
     return True
@@ -112,8 +111,6 @@ def play():
         add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
         t = vaildate_player_moves(leds, listOfcolors)
-        
-    
 
 
 #start game
