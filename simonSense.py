@@ -97,7 +97,7 @@ def check_sensors():
         #check if the fire sensor value changed
         fireV = mcp.read_adc(0)
         if fireV < 100:
-            light_led(dSensors[fire])
+            light_led(dSensors["fire"])
             sensorValues[0] = fireV
             print("fire: ", fireV)
             print(dSensors["fire"])
@@ -105,7 +105,7 @@ def check_sensors():
         #check if the light sensor value changed
         lightV = mcp.read_adc(1)
         if abs(lightV - sensorValues[1] > 100):
-            light_led(dSensors[light])
+            light_led(dSensors["light"])
             sensorValues[1] = lightV
             print("light: ", lightV)
             print(dSensors["light"])
@@ -113,7 +113,7 @@ def check_sensors():
         #check if the voice sensor value changed
         voiceV = mcp.read_adc(2)
         if abs(voiceV - sensorValues[2] > 200):
-            light_led(dSensors[voice])
+            light_led(dSensors["voice"])
             sensorValues[2] = voiceV
             print("voice: ", voiceV)
             print(dSensors["voice"])
@@ -121,7 +121,7 @@ def check_sensors():
         #check if the potentiometer sensor value changed
         potentiometerV = mcp.read_adc(3)
         if abs(potentiometerV - sensorValues[3] > 200):
-            light_led(dSensors[potentiometer])
+            light_led(dSensors["potentiometer"])
             sensorValues[3] = potentiometerV
             print("pot: ", potentiometerV)
             print(dSensors["potentiometer"])
