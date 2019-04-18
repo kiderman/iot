@@ -94,12 +94,14 @@ def vaildate_player_moves(leds, listOfcolors):
 def check_sensors():
     number = 0
     while True:
+        
         #check if the fire sensor value changed
         fireV = mcp.read_adc(0)
         if fireV < 100:
             sensorValues[0] = fireV
             print("fire: ", fireV)
             print(dSensors["fire"])
+            sleep(0.5)
             return dSensors["fire"]
         #check if the light sensor value changed
         lightV = mcp.read_adc(1)
@@ -107,6 +109,7 @@ def check_sensors():
             sensorValues[1] = lightV
             print("light: ", lightV)
             print(dSensors["light"])
+            sleep(0.5)
             return dSensors["light"]
         #check if the voice sensor value changed
         voiceV = mcp.read_adc(2)
@@ -114,6 +117,7 @@ def check_sensors():
             sensorValues[2] = voiceV
             print("voice: ", voiceV)
             print(dSensors["voice"])
+            sleep(0.5)
             return dSensors["voice"]
         #check if the potentiometer sensor value changed
         potentiometerV = mcp.read_adc(3)
@@ -121,8 +125,9 @@ def check_sensors():
             sensorValues[3] = potentiometerV
             print("pot: ", potentiometerV)
             print(dSensors["potentiometer"])
+            sleep(0.5)
             return dSensors["potentiometer"]
-        sleep(0.5)
+        
 
 #game over case
 def game_over(leds, listOfcolors):
@@ -149,7 +154,7 @@ def play():
         add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
         t = vaildate_player_moves(leds, listOfcolors)
-        sleep(0.5)
+        
 
 
 #start game
