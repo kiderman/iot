@@ -42,7 +42,7 @@ sensors = ["fire", "light", "voice", "potentiometer"]
 sounds = [440, 880, 20, 1760]
 
 dSounds = dict(zip(leds, sounds))
-dSensors = dict(zip(leds, sensors))
+dSensors = dict(zip(sensors, leds))
 #sensorInitialValues - fire, light, voice, potentiometer
 sensorValues = [mcp.read_adc(0), mcp.read_adc(1), mcp.read_adc(2), mcp.read_adc(3)]
 listOfcolors = []
