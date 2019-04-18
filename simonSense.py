@@ -90,7 +90,6 @@ def vaildate_player_moves(leds, listOfcolors):
 
     #if he followed all the colors return true to continue the game
     sensorValues = [mcp.read_adc(0), mcp.read_adc(1), mcp.read_adc(2), mcp.read_adc(3)]
-    GPIO.cleanup()
     return True
 
 def check_sensors():
@@ -115,7 +114,7 @@ def check_sensors():
             return dSensors["light"]
         #check if the voice sensor value changed
         voiceV = mcp.read_adc(2)
-        if abs(voiceV - sensorValues[2] > 300):
+        if abs(voiceV - sensorValues[2] > 200):
             sensorValues[2] = voiceV
             print("voice: ", voiceV)
             print(dSensors["voice"])
