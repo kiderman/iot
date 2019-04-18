@@ -22,7 +22,7 @@ from mpu6050 import mpu6050
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 wiringpi.wiringPiSetupGpio()
-wiringpi.softToneCreate(24)
+wiringpi.softToneCreate(27)
 
 #Software SPI configuration:
 CLK  = 18
@@ -33,7 +33,7 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 
 
 #number of pin for each part
-speaker = 24
+speaker = 27
 blue = 5
 green = 6
 yellow = 13
