@@ -86,7 +86,7 @@ def vaildate_player_moves(leds, listOfcolors):
                 return False
             else:
                     i += 1
-                    sleep(0.5)
+                    sleep(1)
 
     #if he followed all the colors return true to continue the game
     return True
@@ -122,6 +122,7 @@ def check_sensors():
             print("pot: ", potentiometerV)
             print(dSensors["potentiometer"])
             return dSensors["potentiometer"]
+        sleep(0.5)
 
 #game over case
 def game_over(leds, listOfcolors):
@@ -148,6 +149,7 @@ def play():
         add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
         t = vaildate_player_moves(leds, listOfcolors)
+        sleep(0.5)
 
 
 #start game
