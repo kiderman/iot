@@ -89,7 +89,6 @@ def vaildate_player_moves(leds, listOfcolors):
                     sleep(1)
 
     #if he followed all the colors return true to continue the game
-    sensorValues = [mcp.read_adc(0), mcp.read_adc(1), mcp.read_adc(2), mcp.read_adc(3)]
     return True
 
 def check_sensors():
