@@ -14,8 +14,7 @@ import wiringpi
 from time import sleep
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
-import Adafruit_DHT
-from mpu6050 import mpu6050
+
 
 
 #Set up the script to use the BCM pin configuration
@@ -39,13 +38,13 @@ green = 6
 yellow = 13
 red = 19
 leds = [blue, green, yellow, red]
-sensors = [fire, light, voice, potentiometer]
+sensors = ["fire", "light", "voice", "potentiometer"]
 sounds = [440, 880, 20, 1760]
 
 dSounds = dict(zip(leds, sounds))
 dSensors = dict(zip(leds, sensors))
 #sensorInitialValues - fire, light, voice, potentiometer
-sensorValues = [mcp.read_adc[0], mcp.read_adc[1], mcp.read_adc[2], mcp.read_adc[3]]
+sensorValues = [mcp.read_adc(0), mcp.read_adc(1), mcp.read_adc(2), mcp.read_adc(3)]
 listOfcolors = []
 
 
@@ -96,32 +95,36 @@ def check_sensors():
     number = 0
     while True:
         #check if the fire sensor value changed
-        fireV = mcp.read_adc[0]
+        fireV = mcp.read_adc(0)
         if fireV < 100:
             light_led(dSensors[fire])
             sensorValues[0] = fireV
             print("fire: ", fireV)
+            print(dSensors[fire])
             return dSensors[fire]
         #check if the light sensor value changed
-        lightV = mcp.read_adc[1]
+        lightV = mcp.read_adc(1)
         if abs(lightV - sensorValues[1] > 100):
             light_led(dSensors[light])
             sensorValues[1] = lightV
             print("light: ", lightV)
+            print(dSensors[light])
             return dSensors[light]
         #check if the voice sensor value changed
-        voiceV = mcp.read_adc[2]
+        voiceV = mcp.read_adc(2)
         if abs(voiceV - sensorValues[2] > 200):
             light_led(dSensors[voice])
             sensorValues[2] = voiceV
             print("voice: ", voiceV)
+            print(dSensors[voice])
             return dSensors[voice]
         #check if the potentiometer sensor value changed
-        potentiometerV = mcp.read_adc[3]
+        potentiometerV = mcp.read_adc(3)
         if abs(potentiometerV - sensorValues[3] > 200):
             light_led(dSensors[potentiometer])
             sensorValues[3] = potentiometerV
             print("pot: ", potentiometerV)
+            print(dSensors[potentiometer])
             return dSensors[potentiometer]
 
 #game over case
