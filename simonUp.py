@@ -1,6 +1,6 @@
 """
 Einav Kiderman 205363013
-Inbal Carasso 204694111
+Inbal Carasso Lev 204694111
 
 """
 import RPi.GPIO as GPIO
@@ -13,16 +13,16 @@ from time import sleep
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 wiringpi.wiringPiSetupGpio()
-wiringpi.softToneCreate(24)
+wiringpi.softToneCreate(27)
 
 #number of pin for each part
-speaker = 24
+speaker = 27
 blue = 5
 green = 6
 yellow = 13
 red = 19
 leds = [blue, green, yellow, red]
-buttons = [25, 12, 16, 21]
+buttons = [22, 12, 16, 21]
 sounds = [440, 880, 20, 1760]
 dSounds = dict(zip(leds, sounds))
 dButtons = dict(zip(leds, buttons))
@@ -43,13 +43,13 @@ for led in leds:
 #when button pressed light the led and play the sound
 def button_light_led(led):
         buttonState = GPIO.input(dButtons[led])
-        print(dButtons[led])
         if(not buttonState):
             GPIO.output(led, GPIO.HIGH)
             wiringpi.softToneWrite(speaker, dSounds[led])
-            sleep(1)
+            sleep(0.5)
             wiringpi.softToneWrite(speaker, 0)
             GPIO.output(led, GPIO.LOW)
+            sleep(0.5)
         else:
             GPIO.output(led, GPIO.LOW)
 
@@ -57,7 +57,7 @@ def button_light_led(led):
 def add_color(leds, listOfcolors):
     numOfled = random.randint(0,3)
     listOfcolors.append(leds[numOfled])
-    print(listOfcolors)
+   
 
 #play pattern for the player to repeat - the list of colors is a list of the numbers of the pins of the leds
 def play_pattern(listOfcolors):
@@ -67,23 +67,19 @@ def play_pattern(listOfcolors):
 
 #wait for the player to repeat the notes and check if he did it correct
 def vaildate_player_moves(leds, listOfcolors):
-    print("validate", listOfcolors)
     i = 0
     #check if some button was pushed
     while (i < len(listOfcolors)):
         for led in leds:
-            print(led)
-            print(dButtons[led])
             current = (GPIO.input(dButtons[led]) == GPIO.HIGH)
             if current:
-                print("True")
             #if the user clicked the wrong button
-                if (not listOfcolors[i] == current):
+                if (not listOfcolors[i] == led):
                     game_over(leds, listOfcolors)
                     return False
                 else:
                         i += 1
-                        sleep(1)
+                        sleep(0.5)
 
                 #if he followed all the colors return true to continue the game
     return True
@@ -106,8 +102,9 @@ def game_over(leds, listOfcolors):
         GPIO.output(leds[1], GPIO.LOW)
         GPIO.output(leds[2], GPIO.LOW)
         GPIO.output(leds[3], GPIO.LOW)
+        sleep(1)
 
-    print("Game Over! Your score is:", len(listOfcolors))
+    print("Game Over! Your score is:", len(listOfcolors)-1)
 
 def play():
    t = True
