@@ -100,32 +100,32 @@ def check_sensors():
             light_led(dSensors[fire])
             sensorValues[0] = fireV
             print("fire: ", fireV)
-            print(dSensors[fire])
-            return dSensors[fire]
+            print(dSensors["fire"])
+            return dSensors["fire"]
         #check if the light sensor value changed
         lightV = mcp.read_adc(1)
         if abs(lightV - sensorValues[1] > 100):
             light_led(dSensors[light])
             sensorValues[1] = lightV
             print("light: ", lightV)
-            print(dSensors[light])
-            return dSensors[light]
+            print(dSensors["light"])
+            return dSensors["light"]
         #check if the voice sensor value changed
         voiceV = mcp.read_adc(2)
         if abs(voiceV - sensorValues[2] > 200):
             light_led(dSensors[voice])
             sensorValues[2] = voiceV
             print("voice: ", voiceV)
-            print(dSensors[voice])
-            return dSensors[voice]
+            print(dSensors["voice"])
+            return dSensors["voice"]
         #check if the potentiometer sensor value changed
         potentiometerV = mcp.read_adc(3)
         if abs(potentiometerV - sensorValues[3] > 200):
             light_led(dSensors[potentiometer])
             sensorValues[3] = potentiometerV
             print("pot: ", potentiometerV)
-            print(dSensors[potentiometer])
-            return dSensors[potentiometer]
+            print(dSensors["potentiometer"])
+            return dSensors["potentiometer"]
 
 #game over case
 def game_over(leds, listOfcolors):
