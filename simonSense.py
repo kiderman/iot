@@ -86,9 +86,9 @@ def vaildate_player_moves(leds, listOfcolors):
                 return False
             else:
                     i += 1
-                    sleep(1)
 
     #if he followed all the colors return true to continue the game
+    sleep(0.5)
     return True
 
 def check_sensors():
