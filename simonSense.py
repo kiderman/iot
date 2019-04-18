@@ -152,7 +152,6 @@ def game_over(leds, listOfcolors):
 
 def play():
    t = True
-   print("start round: ", len(listOfcolors))
    while t:
         add_color(leds, listOfcolors)
         play_pattern(listOfcolors)
