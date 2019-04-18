@@ -93,10 +93,11 @@ def vaildate_player_moves(leds, listOfcolors):
     return True
 
 def check_sensors():
-    number = 0
+    
     while True:
         
         #check if the fire sensor value changed
+        #the numbers are approximated by the numbers from the channels when we activated the sensors
         fireV = mcp.read_adc(0)
         if fireV < 100:
             print("fire: ", fireV)
@@ -120,7 +121,7 @@ def check_sensors():
         #check if the potentiometer sensor value changed
         potentiometerV = mcp.read_adc(3)
         if abs(potentiometerV - sensorValues[3] > 200):
-            print("pot: ", potentiometerV)
+            print("potentiometer: ", potentiometerV)
             print(dSensors["potentiometer"])
             sleep(0.2)
             return dSensors["potentiometer"]
